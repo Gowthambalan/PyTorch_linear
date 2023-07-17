@@ -1,0 +1,40 @@
+MNIST datase--------++
+
+pip install torch
+pip install torchvision --no-deps
+
+import torch
+import torchvision
+import torch.nn as tn
+import matplotlib.pyplot as plt
+import torchvision.transforms as tt
+import torch.utils as utils
+======================================================
+
+Dataset MNIST
+    Number of datapoints: 60000
+    Root location: ./data
+    Split: Train
+Dataset MNIST
+    Number of datapoints: 10000
+    Root location: data
+    Split: Test
+
+(<PIL.Image.Image image mode=L size=28x28 at 0x7FEFA4362E80>, 5)
+
+import matplotlib.pyplot as plt
+
+plt.subplot(1,2,1)
+image, label = train_data[0]
+plt.imshow(image, cmap='gray')
+plt.title("Label of Image:{}".format(label),fontsize=20)
+plt.subplot(1,2,2)
+image, label = train_data[1]
+plt.imshow(image, cmap='gray')
+plt.title("Label of Image:{}".format(label),fontsize=20)
+
+
+
+
+
+
