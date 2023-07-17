@@ -1,0 +1,56 @@
+input_size = 28*28  #Size of image
+
+num_classes = 10  #the image number are in range 0-10
+
+num_epochs = 5 #one cycle through the full train data
+
+batch_size = 100 #sample size consider before updating the model’s weights
+
+learning_rate = 0.001  #step size to update parameter
+
+============Loss And Optimizer=========
+
+model = LogisticRegression(input_size,num_classes)
+loss = tn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(),lr=learning_rate)
+
+
+run = 0
+for epoch in range(num_epochs):
+    for i,(images,labels) in enumerate(train_dataLoader):
+        images = torch.autograd.Variable(images.view(-1,input_size))
+        labels = torch.autograd.Variable(labels)
+        
+        # Nullify gradients w.r.t. parameters
+        optimizer.zero_grad()
+        #forward propagation
+        output = model(images)
+        # compute loss based on obtained value and actual label
+        compute_loss = loss(output,labels)
+        # backward propagation
+        compute_loss.backward()
+        # update the parameters
+        optimizer.step()
+        run+=1
+        
+        if (i+1)%200 == 0:
+            # check total accuracy of predicted value and actual label
+            accurate = 0
+            total = 0
+            for images,labels in test_dataLoader:
+                images = torch.autograd.Variable(images.view(-1,input_size))
+                output = model(images)
+                _,predicted = torch.max(output.data, 1)
+                # total labels
+                total+= labels.size(0)
+                
+                # Total correct predictions
+                accurate+= (predicted == labels).sum()
+                accuracy_score = 100 * accurate/total
+            
+            print('Iteration: {}. Loss: {}. Accuracy: {}'.format(run, compute_loss.item(), accuracy_score))
+
+print('Final Accuracy:',accuracy_score)
+
+
+
