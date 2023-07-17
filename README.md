@@ -10,7 +10,7 @@ Pytorch is the powerful Machine Learning Python Framework
 Logistics Regression of MNIST In Pytorch
 
 <p>
-<img src="" height=340/>
+<img src="https://github.com/Gowthambalan/PyTorch_linear/blob/main/final%20rs.png" height=340/>
 </p>  
 
 
